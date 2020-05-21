@@ -10,7 +10,11 @@ namespace Qurious.Controllers
     [ApiController]
     public class EnquiriesController: ControllerBase
     {
-        private readonly MockEnquiryRepository _respository = new MockEnquiryRepository();
+        private readonly IEnquiryRepository _respository;
+        public EnquiriesController(IEnquiryRepository repository)
+        {
+            _respository = repository;
+        }
         //GET api/enquiries
         [HttpGet]
         public ActionResult <IEnumerable<Enquiry>> GetAllEnquiries()
