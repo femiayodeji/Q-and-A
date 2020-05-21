@@ -32,7 +32,8 @@ namespace Qurious
                 opt.UseSqlServer(Configuration.GetConnectionString("QuriousConnection"));
             });
             services.AddControllers();
-            services.AddScoped<IEnquiryRepository, MockEnquiryRepository>();
+            // services.AddScoped<IEnquiryRepository, MockEnquiryRepository>();
+            services.AddScoped<IEnquiryRepository, SqlEnquiryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
