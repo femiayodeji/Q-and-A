@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using Qurious.Data;
 using Qurious.Models;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using Qurious.DTOs;
 
 namespace Qurious.Controllers
 {
@@ -11,23 +13,30 @@ namespace Qurious.Controllers
     public class EnquiriesController: ControllerBase
     {
         private readonly IEnquiryRepository _respository;
-        public EnquiriesController(IEnquiryRepository repository)
+        private IMapper _mapper;
+
+        public EnquiriesController(IEnquiryRepository repository, IMapper mapper)
         {
             _respository = repository;
-        }
-        //GET api/enquiries
-        [HttpGet]
-        public ActionResult <IEnumerable<Enquiry>> GetAllEnquiries()
-        {
-            var enquiryItems = _respository.GetAllEnquiries();
-            return Ok(enquiryItems);
+            _mapper = mapper;
         }
 
-        //GET api/enquiries/5
+        //GET api/enquiries
+        [HttpGet]
+        public ActionResult <IEnumerable<EnquiryReadDTO>> GetAllEnquiries()
+        {
+            var enquiryItems = _respository.GetAllEnquiries();
+            return Ok(_mapper.Map<IEnumerable<EnquiryReadDTO>>(enquiryItems));
+        }
+
+        //GET api/enquiries/{id}
         [HttpGet("{id}")]
-        public ActionResult <Enquiry> GetEnquiryById(int id){
+        public ActionResult <EnquiryReadDTO> GetEnquiryById(int id){
             var enquiryItem = _respository.GetEnquiryById(id);
-            return Ok(enquiryItem);
+            if(enquiryItem != null){
+                return Ok(_mapper.Map<EnquiryReadDTO>(enquiryItem));
+            }
+            return NotFound();
         }
     }
 }

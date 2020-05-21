@@ -52,3 +52,5 @@ C:\workspace\c#\Qurious\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\
 C:\workspace\c#\Qurious\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\workspace\c#\Qurious\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\workspace\c#\Qurious\obj\Debug\netcoreapp3.1\Qurious.csproj.CopyComplete
+C:\workspace\c#\Qurious\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\workspace\c#\Qurious\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

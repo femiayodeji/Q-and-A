@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,9 @@ namespace Qurious
                 opt.UseSqlServer(Configuration.GetConnectionString("QuriousConnection"));
             });
             services.AddControllers();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             // services.AddScoped<IEnquiryRepository, MockEnquiryRepository>();
             services.AddScoped<IEnquiryRepository, SqlEnquiryRepository>();
         }
