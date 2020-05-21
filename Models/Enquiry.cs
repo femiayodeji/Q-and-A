@@ -1,4 +1,4 @@
-namespace qurious.Models{
+namespace Qurious.Models{
     public class Enquiry{
         public int Id {get; set;}
         public string Question {get; set;}
