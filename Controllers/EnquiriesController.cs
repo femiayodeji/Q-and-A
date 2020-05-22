@@ -53,7 +53,7 @@ namespace Qurious.Controllers
 
         //PUT api/enquires/{id}
         [HttpPut("{id}")]
-        public ActionResult <EnquiryReadDTO> UpdateEnquiry(int id, EnquiryUpdateDTO enquiryUpdateDTO)
+        public ActionResult UpdateEnquiry(int id, EnquiryUpdateDTO enquiryUpdateDTO)
         {
             var enquiryModelFromRepo = _repository.GetEnquiryById(id);
             if(enquiryModelFromRepo == null){
