@@ -12,12 +12,12 @@ namespace Qurious.Controllers
     [ApiController]
     public class EnquiriesController: ControllerBase
     {
-        private readonly IEnquiryRepository _respository;
+        private readonly IEnquiryRepository _repository;
         private IMapper _mapper;
 
         public EnquiriesController(IEnquiryRepository repository, IMapper mapper)
         {
-            _respository = repository;
+            _repository = repository;
             _mapper = mapper;
         }
 
@@ -25,14 +25,14 @@ namespace Qurious.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<EnquiryReadDTO>> GetAllEnquiries()
         {
-            var enquiryItems = _respository.GetAllEnquiries();
+            var enquiryItems = _repository.GetAllEnquiries();
             return Ok(_mapper.Map<IEnumerable<EnquiryReadDTO>>(enquiryItems));
         }
 
         //GET api/enquiries/{id}
         [HttpGet("{id}", Name="GetEnquiryById")]
         public ActionResult <EnquiryReadDTO> GetEnquiryById(int id){
-            var enquiryItem = _respository.GetEnquiryById(id);
+            var enquiryItem = _repository.GetEnquiryById(id);
             if(enquiryItem != null){
                 return Ok(_mapper.Map<EnquiryReadDTO>(enquiryItem));
             }
@@ -44,8 +44,8 @@ namespace Qurious.Controllers
         public ActionResult <EnquiryReadDTO> CreateEnquiry(EnquiryCreateDTO enquiryCreateDTO)
         {
             var enquiryModel = _mapper.Map<Enquiry>(enquiryCreateDTO);
-            _respository.CreateEnquiry(enquiryModel);
-            _respository.SaveChanges();
+            _repository.CreateEnquiry(enquiryModel);
+            _repository.SaveChanges();
             
             var enquiryReadDTO = _mapper.Map<EnquiryReadDTO>(enquiryModel);
             return CreatedAtRoute(nameof(GetEnquiryById), new {Id = enquiryModel.Id}, enquiryReadDTO);
@@ -55,13 +55,13 @@ namespace Qurious.Controllers
         [HttpPut("{id}")]
         public ActionResult <EnquiryReadDTO> UpdateEnquiry(int id, EnquiryUpdateDTO enquiryUpdateDTO)
         {
-            var enquiryModelFromRepo = _respository.GetEnquiryById(id);
+            var enquiryModelFromRepo = _repository.GetEnquiryById(id);
             if(enquiryModelFromRepo == null){
                 return NotFound();
             }
             _mapper.Map(enquiryUpdateDTO, enquiryModelFromRepo);            
-            _respository.UpdateEnquiry(enquiryModelFromRepo);
-            _respository.SaveChanges();
+            _repository.UpdateEnquiry(enquiryModelFromRepo);
+            _repository.SaveChanges();
 
             return NoContent();
         }
