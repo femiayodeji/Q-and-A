@@ -5,6 +5,11 @@ namespace Qurious.Data
 {
     public class MockEnquiryRepository : IEnquiryRepository
     {
+        public void CreateEnquiry(Enquiry enquiry)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Enquiry> GetAllEnquiries()
         {
             var enquiries = new List<Enquiry>(){
@@ -18,6 +23,11 @@ namespace Qurious.Data
         public Enquiry GetEnquiryById(int id)
         {
             return new Enquiry{Id = 0, Question = "Our ______ are our greatest asset.", Answer = "People", Difficulty = 1};
+        }
+
+        public bool SaveChanges()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

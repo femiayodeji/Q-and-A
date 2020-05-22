@@ -30,13 +30,25 @@ namespace Qurious.Controllers
         }
 
         //GET api/enquiries/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name="GetEnquiryById")]
         public ActionResult <EnquiryReadDTO> GetEnquiryById(int id){
             var enquiryItem = _respository.GetEnquiryById(id);
             if(enquiryItem != null){
                 return Ok(_mapper.Map<EnquiryReadDTO>(enquiryItem));
             }
             return NotFound();
+        }
+
+        //POST api/enquiries
+        [HttpPost]
+        public ActionResult <EnquiryReadDTO> CreateEnquiry(EnquiryCreateDTO enquiryCreateDTO)
+        {
+            var enquiryModel = _mapper.Map<Enquiry>(enquiryCreateDTO);
+            _respository.CreateEnquiry(enquiryModel);
+            _respository.SaveChanges();
+            
+            var enquiryReadDTO = _mapper.Map<EnquiryReadDTO>(enquiryModel);
+            return CreatedAtRoute(nameof(GetEnquiryById), new {Id = enquiryModel.Id}, enquiryReadDTO);
         }
     }
 }

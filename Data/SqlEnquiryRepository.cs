@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Qurious.Models;
 
@@ -12,6 +13,15 @@ namespace Qurious.Data
         {
             _context = context;
         }
+
+        public void CreateEnquiry(Enquiry enquiry)
+        {
+            if(enquiry == null){
+                throw new ArgumentNullException(nameof(enquiry));
+            }
+            _context.Enquiries.Add(enquiry);
+        }
+
         public IEnumerable<Enquiry> GetAllEnquiries()
         {
             return _context.Enquiries.ToList();
@@ -20,6 +30,11 @@ namespace Qurious.Data
         public Enquiry GetEnquiryById(int id)
         {
             return _context.Enquiries.FirstOrDefault(x => x.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
         }
     }
 }

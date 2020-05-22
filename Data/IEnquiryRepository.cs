@@ -5,7 +5,9 @@ namespace Qurious.Data
 {
     public interface IEnquiryRepository
     {
+        bool SaveChanges();
         IEnumerable<Enquiry> GetAllEnquiries();
         Enquiry GetEnquiryById(int id);
+        void CreateEnquiry(Enquiry enquiry);
     }
 }

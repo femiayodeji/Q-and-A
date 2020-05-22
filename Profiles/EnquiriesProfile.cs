@@ -8,7 +8,9 @@ namespace Qurious.Profiles
     {
         public EnquiriesProfile()
         {
+            //Source -> Target
             CreateMap<Enquiry, EnquiryReadDTO>();
+            CreateMap<EnquiryCreateDTO, Enquiry>();
         }
     }
 }
