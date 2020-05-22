@@ -36,5 +36,10 @@ namespace Qurious.Data
         {
             return (_context.SaveChanges() >= 0);
         }
+
+        public void UpdateEnquiry(Enquiry enquiry)
+        {
+            //Nothing
+        }
     }
 }

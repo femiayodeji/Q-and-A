@@ -9,5 +9,6 @@ namespace Qurious.Data
         IEnumerable<Enquiry> GetAllEnquiries();
         Enquiry GetEnquiryById(int id);
         void CreateEnquiry(Enquiry enquiry);
+        void UpdateEnquiry(Enquiry enquiry);
     }
 }

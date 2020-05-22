@@ -29,5 +29,10 @@ namespace Qurious.Data
         {
             throw new System.NotImplementedException();
         }
+
+        public void UpdateEnquiry(Enquiry enquiry)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
