@@ -12,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 using Qurious.Data;
 
 namespace Qurious
@@ -32,7 +33,10 @@ namespace Qurious
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("QuriousConnection"));
             });
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s => 
+            {
+                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

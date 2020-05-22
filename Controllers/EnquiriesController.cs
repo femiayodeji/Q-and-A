@@ -4,6 +4,7 @@ using Qurious.Models;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using Qurious.DTOs;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace Qurious.Controllers
 {
@@ -60,6 +61,29 @@ namespace Qurious.Controllers
                 return NotFound();
             }
             _mapper.Map(enquiryUpdateDTO, enquiryModelFromRepo);            
+            _repository.UpdateEnquiry(enquiryModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/enquiries/{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialEnquiryUpdate(int id, JsonPatchDocument<EnquiryUpdateDTO> patchDoc)
+        {
+            var enquiryModelFromRepo = _repository.GetEnquiryById(id);
+            if(enquiryModelFromRepo == null){
+                return NotFound();
+            }
+
+            var enquiryAsPatch = _mapper.Map<EnquiryUpdateDTO>(enquiryModelFromRepo);
+            patchDoc.ApplyTo(enquiryAsPatch, ModelState);
+
+            if(!TryValidateModel(enquiryAsPatch)){
+                return ValidationProblem(ModelState);
+            }
+            
+            _mapper.Map(enquiryAsPatch, enquiryModelFromRepo);  
             _repository.UpdateEnquiry(enquiryModelFromRepo);
             _repository.SaveChanges();
 
