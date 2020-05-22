@@ -22,6 +22,14 @@ namespace Qurious.Data
             _context.Enquiries.Add(enquiry);
         }
 
+        public void DeleteEnquiry(Enquiry enquiry)
+        {
+            if(enquiry == null){
+                throw new ArgumentNullException(nameof(enquiry));
+            }
+            _context.Enquiries.Remove(enquiry);
+        }
+
         public IEnumerable<Enquiry> GetAllEnquiries()
         {
             return _context.Enquiries.ToList();

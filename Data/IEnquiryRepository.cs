@@ -10,5 +10,6 @@ namespace Qurious.Data
         Enquiry GetEnquiryById(int id);
         void CreateEnquiry(Enquiry enquiry);
         void UpdateEnquiry(Enquiry enquiry);
+        void DeleteEnquiry(Enquiry enquiry);
     }
 }

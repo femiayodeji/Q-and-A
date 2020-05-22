@@ -10,6 +10,11 @@ namespace Qurious.Data
             throw new System.NotImplementedException();
         }
 
+        public void DeleteEnquiry(Enquiry enquiry)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public IEnumerable<Enquiry> GetAllEnquiries()
         {
             var enquiries = new List<Enquiry>(){

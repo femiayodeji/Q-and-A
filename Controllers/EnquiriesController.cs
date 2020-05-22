@@ -65,5 +65,19 @@ namespace Qurious.Controllers
 
             return NoContent();
         }
+
+        //DELETE api/enquiries/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteEnquiry(int id)
+        {
+            var enquiryModelFromRepo = _repository.GetEnquiryById(id);
+            if(enquiryModelFromRepo == null){
+                return NotFound();
+            }
+            _repository.DeleteEnquiry(enquiryModelFromRepo);
+            _repository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
