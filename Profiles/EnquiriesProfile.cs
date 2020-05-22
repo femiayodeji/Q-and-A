@@ -11,7 +11,6 @@ namespace Qurious.Profiles
             //Source -> Target
             CreateMap<Enquiry, EnquiryReadDTO>();
             CreateMap<EnquiryCreateDTO, Enquiry>();
-            CreateMap<EnquiryUpdateDTO, Enquiry>();
         }
     }
 }
